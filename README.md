@@ -1,14 +1,25 @@
-﻿# Project Title: List of Times You Were Betrayed by Your Water Bottle
+# Ecommerce-Follow-Along
+Welcome to the **Ecommerv+ce Follow Along Project**, this is a hands-on project where we will build a complete e-commerce application using the MERN stack (MongoDB, Express.js, React.js, and Node.j)s. The goal is to learn how to developm a full-stack web application step by step.
 
-## Idea:
-This project explores the humorous and frustrating moments when your water bottle lets you down in the most inconvenient ways. Whether it leaks, gets stuck, or refuses to open, these betrayals can bring a little bit of chaos to your day. The project aims to compile a collection of relatable and funny scenarios where your water bottle is the villain.
+## Milestone 1: Project Overview
 
-## Features:
-- A list of humorous and exaggerated scenarios where the water bottle "betrays" you.
-- Categories of betrayal such as "Leak Failures," "The Lid That Won't Budge," "Spilling in the Bag," and "Too Cold, Too Hot."
-- Interactive elements allowing users to add their own "betrayal" moments.
-- Shareable content, so users can send their most epic water bottle betrayals to friends.
-- A possible option to create a 'Betrayal Counter' to keep track of how many times you've been betrayed by your water bottle.
+#### 1. Understanding the MERN Stack:
+**MongoDB :** A database for storing applicatiom dta in a flexible, document based format.
+**Express.js :** A backend web application framework for building APIs and handling server logics.
+**React.js :** A freamework library for building User Interfaces.
+**Node.js :** A runtime environment that allows javascript to run on the server.
 
-## Goal:
-The goal of this project is to bring some fun and lightheartedness to everyday annoyances, showcasing the 'betrayal' of something as simple as a water bottle. It's meant to make you laugh while reflecting on those minor daily struggles that everyone can relate to.
+#### 2. REST API Structure
+REST APIs are used to allow communication between the frontend and backend.
+We'll create APIs for:
+-**User Authentication**: Allowing users to register and login.
+-**Product Management**: Adding, updating, and retrieving product data.  
+-**Order Handling**: Managing customer orders.
+
+#### 3. Database Schema Design
+We'll learn how to design and organize data using MongoDB. A schema helps us to define how the data is stored and related.
+
+#### 4. Authentication
+Authentication ensures only the right to people who can access certain features. For example:
+- Users need to log in to place orders or see their personal data.
+- It keeps the app secure by verifying user's identities.

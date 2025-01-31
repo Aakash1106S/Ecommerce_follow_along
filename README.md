@@ -23,3 +23,6 @@ We'll learn how to design and organize data using MongoDB. A schema helps us to 
 Authentication ensures only the right to people who can access certain features. For example:
 - Users need to log in to place orders or see their personal data.
 - It keeps the app secure by verifying user's identities.
+#### 7 Milestone 7 Summary
+In this milestone, we implemented user login authentication by validating credentials and comparing encrypted passwords using bcrypt. The process involves retrieving user data, hashing the entered password, and matching it with the stored hash. If authenticated, access is granted; otherwise, an error is returned. This enhances security and protects user data. 🚀
+- 

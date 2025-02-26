@@ -6,19 +6,41 @@ export default function ProductDetails({ addToCart }) {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
-    
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
                 const response = await axios.get(`http://localhost:8000/api/products/${id}`);
                 setProduct(response.data);
             } catch (error) {
-                console.error("Failed to fetch product details");
+                console.error("Failed to fetch product details", error);
             }
         };
 
         fetchProduct();
     }, [id]);
+
+    const addtocart = async () => {
+        try {
+            const userEmail = localStorage.getItem("email");
+    
+            if (!userEmail) {
+                console.error("User email not found!");
+                return;
+            }
+    
+            const response = await axios.post("http://localhost:8000/api/products/cart", {
+                userId: userEmail, // ✅ Use retrieved email
+                productId: id,
+                quantity: quantity,
+            });
+    
+            console.log("Product added to cart:", response.data);
+        } catch (err) {
+            console.error("Error adding product to cart:", err.response ? err.response.data : err.message);
+        }
+    };
+    
 
     if (!product) return <p className="text-white text-center">Loading product details...</p>;
 
@@ -66,14 +88,12 @@ export default function ProductDetails({ addToCart }) {
                         {/* Add to Cart Button */}
                         <button 
                             className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                            onClick={() => addToCart(product, quantity)}
+                            onClick={addtocart} // ✅ Fixed function call
                         >
                             Add to Cart
                         </button>
                     </div>
                 </div>
-
-                
             </div>
         </div> 
     );

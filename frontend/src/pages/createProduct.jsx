@@ -37,12 +37,12 @@ const CreateProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+    
         if (!images.length) {
             alert("Please select at least one image.");
             return;
         }
-
+    
         const formData = new FormData();
         formData.append("name", name);
         formData.append("description", description);
@@ -50,16 +50,17 @@ const CreateProduct = () => {
         formData.append("stock", stock);
         formData.append("category", category);
         formData.append("tags", tags);
-
+        formData.append("email", email);  
+    
         images.forEach((image) => {
             formData.append("images", image);
         });
-
+    
         try {
             const response = await axios.post("http://localhost:8000/api/products/create", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
-
+    
             console.log("Success:", response.data);
             alert("Product created successfully!");
         } catch (error) {
@@ -67,6 +68,7 @@ const CreateProduct = () => {
             alert("Failed to create product.");
         }
     };
+    
 
     return (
         <div className="w-[90%] max-w-[500px] bg-white shadow h-auto rounded-[4px] p-4 mx-auto">

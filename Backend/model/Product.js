@@ -37,6 +37,10 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: Date.now, 
     },
+    email: { 
+        type: String, 
+        required: true
+     },
 });
 
 const Product = mongoose.model("Product", productSchema);

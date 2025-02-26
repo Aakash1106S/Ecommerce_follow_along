@@ -20,6 +20,7 @@ const user = require("./controller/user");
 const productRoutes = require("./controller/product")
 app.use("/api/v2/user", user);
 app.use("/api/products", productRoutes);
+app.use("/uploads", express.static("uploads"));
 
 app.use(ErrorHandler);
 

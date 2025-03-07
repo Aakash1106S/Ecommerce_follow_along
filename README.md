@@ -170,5 +170,5 @@ Finalize cart functionality, ensuring product details are stored in the database
 
 Enable users to retrieve and modify their cart data efficiently.
 
-This structured roadmap breaks the project into manageable phases, ensuring a seamless learning and development experience.
+
 

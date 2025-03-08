@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+export default function Product({_id,name, images, description, price }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!images || images.length === 0) return;
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval); 
+  }, [images]);
 
-export default function Product({ product, onMoreInfo }) {
-    const { name, description, images, price } = product;
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-    useEffect(() => {
-        if (images.length > 1) {
-            const interval = setInterval(() => {
-                setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-            }, 3000);
-
-            return () => clearInterval(interval);
-        }
-    }, [images.length]);
-
-    return (
-        <div className="bg-neutral-200 p-4 rounded-lg shadow-md flex flex-col justify-between">
-            <img 
-                src={`http://localhost:8000/${images[currentImageIndex]}`} 
-                alt={name} 
-                className="w-full h-56 object-cover rounded-lg mb-2 transition-opacity duration-500"
-            />
-            <h2 className="text-lg font-bold">{name}</h2>
-            <p className="text-sm opacity-50 line-clamp-2">{description}</p>
-            <p className="text-lg font-bold my-2">${price}</p>
-            <button 
-                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                onClick={onMoreInfo}
-            >
-                More Info
-            </button>
-        </div>
-    );
+  const currentImage = images[currentIndex];
+  return (
+    <div className="bg-neutral-200 p-4 rounded-lg shadow-md flex flex-col justify-between">
+      <div className="w-full ">
+        <img
+          src={`http://localhost:8000${currentImage}`} 
+          alt={name}
+          className="w-full h-56 object-cover rounded-lg mb-2"
+        />
+        <h2 className="text-lg font-bold">{name}</h2>
+        <p className="text-sm opacity-75 mt-2">{description}</p>
+      </div>
+      <div className="w-full mt-4">
+        <p className="text-lg font-bold my-2">${price.toFixed(2)}</p>
+        <button className="w-full text-white px-4 py-2 rounded-md bg-neutral-900 hover:bg-neutral-700 transition duration-300"
+          onClick={() => navigate(`/product/${_id}`)}>
+          More Info
+        </button>
+      </div>
+    </div>
+  );
 }

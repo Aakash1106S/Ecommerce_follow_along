@@ -3,45 +3,60 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Product name is required"],
-        trim: true,
+        required: [true, "Please provide the product name"],
     },
     description: {
         type: String,
-        required: [true, "Product description is required"],
-    },
-    price: {
-        type: Number,
-        required: [true, "Price is required"],
-        min: [0, "Price cannot be negative"],
-    },
-    stock: {
-        type: Number,
-        required: [true, "Stock is required"],
-        min: [0, "Stock cannot be negative"],
+        required: [true, "Please provide the product description"],
     },
     category: {
         type: String,
-        required: [true, "Category is required"],
-        enum: ["Electronics", "Fashions", "Books", "Home Appliance"], 
+        required: [true, "Please provide the product category"],
     },
     tags: {
-        type: [String], 
-    },
-    images: { 
         type: [String],
-        required: true
-    }, 
-
+        default: [],
+    },
+    price: {
+        type: Number,
+        required: [true, "Please provide the product price"],
+    },
+    stock: {
+        type: Number,
+        required: [true, "Please provide the product stock"],
+    },
+    email: {
+        type: String,
+        required: [true, "Please provide an email"],
+        match: [/.+@.+\..+/, "Please provide a valid email address"],
+    },
+    images: {
+        type: [String],
+        required: [true, "Please upload product images"],
+    },
     createdAt: {
         type: Date,
-        default: Date.now, 
+        default: Date.now,
     },
-    email: { 
-        type: String, 
-        required: true
-     },
+
+
+    cart: [
+       {
+        productid: {
+          type: String,
+          required: [true, "Please provide the product ID"],
+          unique: true,
+        },
+        quantity: {
+          type: Number,
+          required: [true, "Please provide the quantity"],
+          min: [0, "Quantity cannot be negative"],
+        },
+      },
+    ],
+
+},{
+    timestamps: true,
 });
 
-const Product = mongoose.model("Product", productSchema);
-module.exports = Product;
+module.exports = mongoose.model("Product", productSchema);

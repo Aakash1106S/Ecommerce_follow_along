@@ -1,44 +1,47 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Product from "../components/Products/Product";
-import { useNavigate } from "react-router-dom";
-
+import Navbar from "../components/navbar";
 export default function Home() {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get("http://localhost:8000/api/products");
-                setProducts(response.data);
-                setLoading(false);
-            } catch (error) {
-                setError("Failed to fetch products.");
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v2/product/get-products")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(data.products);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("❌ Error fetching products:", err);
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
-        fetchProducts();
-    }, []);
+  if (loading) {
+    return <div className="text-center text-white mt-10">Loading products...</div>;
+  }
+  if (error) {
+    return <div className="text-center text-red-500 mt-10">Error: {error}</div>;
+  }
 
-    if (loading) return <p className="text-white text-center">Loading products...</p>;
-    if (error) return <p className="text-red-500 text-center">{error}</p>;
-
-    return (
-        <div className="w-full min-h-screen bg-neutral-800 p-10">
-            <h2 className="text-3xl font-bold text-white text-center mb-6">All Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {products.map((product) => (
-                    <Product 
-                        key={product._id}
-                        product={product}
-                        onMoreInfo={() => navigate(`/product/${product._id}`)}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-}
+  return (
+    <>
+    <Navbar/>
+    <div className="w-full min-h-screen bg-neutral-800">
+      <h1 className="text-3xl text-center text-white py-6">Product Gallery</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
+        {products.map((product) => (
+          <Product key={product._id} {...product} />
+        ))}
+      </div>
+    </div>
+    </>
+  )};

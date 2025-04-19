@@ -2,7 +2,7 @@
 
 Welcome to the **Ecommerce Follow Along Project**, this is a hands-on project where we will build a complete e-commerce application using the MERN stack (Express.js, React.js, and Node.js). The goal is to learn how to develop a full-stack web application step by step.
 
-## ⭐ Milestone 1: Project Overview
+## ⭐ Milestone 1: Project Overview.
 
 ### 🌟 M1. Understanding the MERN Stack
 - **MongoDB**: A database for storing application data in a flexible, document-based format.
